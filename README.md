@@ -1,26 +1,23 @@
 <img align="right" src="https://github-readme-stats.vercel.app/api?username=a76yyyy&show_icons=true&icon_color=CE1D2D&text_color=718096&bg_color=ffffff&hide_title=true" />
 
-# IPDATA
+# ZXIPDB-Python
 
-[![](https://img.shields.io/github/stars/a76yyyy/czipdata?style=social)](https://github.com/a76yyyy/czipdata/stargazers) 
-[![](https://img.shields.io/github/watchers/a76yyyy/czipdata?style=social)](https://github.com/a76yyyy/czipdata/watchers)
-[![](https://img.shields.io/github/forks/a76yyyy/czipdata?style=social)](https://github.com/a76yyyy/czipdata/network/members)
+[![](https://img.shields.io/github/stars/ZX-Inc/zxipdb-python?style=social)](https://github.com/ZX-Inc/zxipdb-python/stargazers) 
+[![](https://img.shields.io/github/watchers/ZX-Inc/zxipdb-python?style=social)](https://github.com/ZX-Inc/zxipdb-python/watchers)
+[![](https://img.shields.io/github/forks/ZX-Inc/zxipdb-python?style=social)](https://github.com/ZX-Inc/zxipdb-python/network/members)
 
 [![](https://img.shields.io/badge/HomePage-a76yyyy-brightgreen)](https://www.a76yyyy.cn) 
-[![](https://img.shields.io/github/license/a76yyyy/czipdata)](https://github.com/a76yyyy/czipdata/blob/main/LICENSE) 
-[![](https://img.shields.io/github/last-commit/a76yyyy/czipdata)](https://github.com/a76yyyy/czipdata/)
-[![](https://img.shields.io/github/commit-activity/m/a76yyyy/czipdata)](https://github.com/a76yyyy/czipdata/)
-![](https://img.shields.io/github/repo-size/a76yyyy/czipdata)
-![](https://img.shields.io/github/pipenv/locked/python-version/a76yyyy/czipdata)
-[![Update](https://github.com/a76yyyy/ipdata/actions/workflows/update.yml/badge.svg)](https://github.com/a76yyyy/ipdata/actions/workflows/update.yml)
-[![Create Release](https://github.com/a76yyyy/ipdata/actions/workflows/create-release.yml/badge.svg)](https://github.com/a76yyyy/ipdata/actions/workflows/create-release.yml)
+[![](https://img.shields.io/github/license/ZX-Inc/zxipdb-python)](https://github.com/ZX-Inc/zxipdb-python/blob/main/LICENSE) 
+[![](https://img.shields.io/github/last-commit/ZX-Inc/zxipdb-python)](https://github.com/ZX-Inc/zxipdb-python/)
+[![](https://img.shields.io/github/commit-activity/m/ZX-Inc/zxipdb-python)](https://github.com/ZX-Inc/zxipdb-python/)
+![](https://img.shields.io/github/repo-size/ZX-Inc/zxipdb-python)
+![](https://img.shields.io/github/pipenv/locked/python-version/ZX-Inc/zxipdb-python)
+[![Update](https://github.com/ZX-Inc/zxipdb-python/actions/workflows/update.yml/badge.svg)](https://github.com/ZX-Inc/zxipdb-python/actions/workflows/update.yml)
+[![Create Release](https://github.com/ZX-Inc/zxipdb-python/actions/workflows/create-release.yml/badge.svg)](https://github.com/ZX-Inc/zxipdb-python/actions/workflows/create-release.yml)
 
-纯真IPv4数据库镜像 / ZXinc_IPv6数据库镜像 & MySQL脚本/SQLite3 同步更新 for Python3(原czipdata项目)
-(数据文件已通过release发布)
+纯真IPv4数据库镜像 / ZXinc_IPv6数据库镜像 & MySQL脚本/SQLite3 同步更新 for Python3 ([原ipdata项目](https://github.com/a76yyyy/ipdata))
 
-Github：[https://github.com/a76yyyy/ipdata](https://github.com/a76yyyy/ipdata)(推荐)
-
-Gitee ：[https://gitee.com/a76yyyy/ipdata](https://gitee.com/a76yyyy/ipdata)(更新频率较低)
+Github：[https://github.com/ZX-Inc/zxipdb-python](https://github.com/ZX-Inc/zxipdb-python)(推荐)
 
 <a href="https://info.flagcounter.com/Fsfs">
 <img align="right" src="https://s05.flagcounter.com/count2/Fsfs/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
@@ -58,7 +55,7 @@ correct.json|地址细分纠错文件|JSON
 ## 安装相关模块
 ```powershell
 # 使用git前请先安装git软件
-git clone --depth=1 https://github.com/a76yyyy/ipdata.git
+git clone --depth=1 https://github.com/ZX-Inc/zxipdb-python.git
 cd ipdata
 # 安装gzip 解压data文件夹中的gz相关文件;
 # 使用sqlite3请先安装sqlite3软件, 数据库文件在data/ipdata.db.gz压缩档内;
@@ -129,7 +126,3 @@ exit()
 示例IPv6 API接口(暂不提供源码):[https://api.a76yyyy.cn/ip?function=ipv6Info&params1=2400:3200::1](https://api.a76yyyy.cn/ip?function=ipv6Info&params1=2400:3200::1)
 
 ![image](pic/v6api.png)
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/a76yyyy/ipdata.svg)](https://starchart.cc/a76yyyy/ipdata)
