@@ -68,7 +68,8 @@ jobs:
         git add .
         git commit -m ${timelocal}
         git pull origin main
-        git tag -a v$(Get-Date -Format 'yyyy.MM.dd') -m "Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        $tagname="v$(Get-Date -Format 'yyyy.MM.dd')"
+        git tag -a ${tagname} -m "Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
         
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -88,6 +89,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
+        tag_name: ${tagname}
         files: |
           Release.txt
           data/*.db.gz
