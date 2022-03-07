@@ -56,7 +56,8 @@ jobs:
       run: |
         chcp 65001
         Set-TimeZone -Name "China Standard Time"
-        echo "Auto Update $(Get-Date -Format 'yyyy-M-d H:m:s')"
+        $timelocal="Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        echo ${timelocal}
         pipenv install --dev
         pipenv run python ./IP_Sync/ip_Sync.py
         
@@ -65,7 +66,7 @@ jobs:
         git config --global user.email ${{ secrets.USER_EMAIL }}
         git config --global user.name ${{ secrets.USER_NAME }}
         git add .
-        git commit -m "Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        git commit -m ${timelocal}
         git pull origin main
         git tag -a v$(Get-Date -Format 'yyyy.MM.dd') -m "Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
         
@@ -75,3 +76,22 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ secrets.REPOSITORY_NAME }}
         tags: true
+        
+    - name: Build
+      run: echo ${timelocal} > Release.txt
+
+    - name: Test
+      run: cat Release.txt
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: |
+          Release.txt
+          data/*.db.gz
+          data/*.sql.gz
+          data/*.dat
+          data/*.db
+          data/*.txt
