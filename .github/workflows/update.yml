@@ -35,6 +35,16 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Get Tag
+      id: get_tag
+      run: |
+        chcp 65001
+        Set-TimeZone -Name "China Standard Time"
+        $timelocal="Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        $tagname="v$(Get-Date -Format 'yyyy.MM.dd')"
+        echo ::set-output name=TIMELOCAL::${timelocal}
+        echo ::set-output name=TAGNAME::${tagname}
 
     - name: Initialize mysql
       uses: ankane/setup-mysql@v1
@@ -54,10 +64,7 @@ jobs:
 
     - name: Update ipdata
       run: |
-        chcp 65001
-        Set-TimeZone -Name "China Standard Time"
-        $timelocal="Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-        echo ${timelocal}
+        echo ${steps.get_tag.outputs.TIMELOCAL}
         pipenv install --dev
         pipenv run python ./IP_Sync/ip_Sync.py
         
@@ -66,10 +73,9 @@ jobs:
         git config --global user.email ${{ secrets.USER_EMAIL }}
         git config --global user.name ${{ secrets.USER_NAME }}
         git add .
-        git commit -m ${timelocal}
+        git commit -m ${steps.get_tag.outputs.TIMELOCAL}
         git pull origin main
-        $tagname="v$(Get-Date -Format 'yyyy.MM.dd')"
-        git tag -a ${tagname} -m "Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        git tag -a ${steps.get_tag.outputs.TAGNAME} -m "${steps.get_tag.outputs.TIMELOCAL}"
         
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -79,7 +85,7 @@ jobs:
         tags: true
         
     - name: Build
-      run: echo ${timelocal} > Release.txt
+      run: echo ${steps.get_tag.outputs.TIMELOCAL} > Release.txt
 
     - name: Test
       run: cat Release.txt
@@ -89,7 +95,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${tagname}
+        tag_name: ${steps.get_tag.outputs.TAGNAME}
         files: |
           Release.txt
           data/*.db.gz
