@@ -15,7 +15,7 @@ import ipv6Update
 from ipSearch import IPLoader,IPv6Loader
 from dat2txt import get_ip_info,get_ipv6_info
 from database import mysql_Database, sqlite3_Database
-from configs import config,default_dat_update,default_sqlite3_update,default_txt_update,default_sql_update,default_sql_export,default_gz_export
+from configs import config,default_dat_update,default_v6dat_update,default_sqlite3_update,default_txt_update,default_sql_update,default_sql_export,default_gz_export
 from dat2mysql import dat2mysql,db2mysql
 from dat2sqlite3 import dat2sqlite3,db2sqlite3
 from collegeUpdate import collegeUpdate
@@ -65,6 +65,8 @@ def dat2Txt(dat_filename= None, txt_filename= None, startIndex= None, endIndex= 
         dat_filename = os.path.abspath(data_dir+os.path.sep+"czipdata.dat")
     if not file_set(dat_filename) or default_dat_update:
         tag = down(dat_filename)
+    else:
+        tag = 0
     q = IPLoader(dat_filename)
     if txt_filename is None:
         txt_filename = os.path.abspath(data_dir+os.path.sep+"czipdata.txt")
@@ -108,8 +110,10 @@ def db2Txt(db_filename= None, txt_filename= None, startIndex= None, endIndex= No
 
     if db_filename is None:
         db_filename = DEFAULT_FILE_LOCATION
-    if not file_set(db_filename) or default_dat_update:
+    if not file_set(db_filename) or default_v6dat_update:
         tag = v6down(db_filename,ipv4update=ipv4update)
+    else:
+        tag = 0
     D = IPv6Loader(db_filename)
     if txt_filename is None:
         txt_filename = os.path.abspath(data_dir+os.path.sep+"ipv6data.txt")
