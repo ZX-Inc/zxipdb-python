@@ -41,7 +41,7 @@ jobs:
       run: |
         chcp 65001
         Set-TimeZone -Name "China Standard Time"
-        $timelocal="Auto_Update_$(Get-Date -Format 'yyyy-MM-dd_HH:mm:ss')"
+        $timelocal="Auto_Update_$(Get-Date -Format 'yyyy.MM.dd')"
         echo ::set-output name=TIMELOCAL::${timelocal}
       
     - name: Get Tag
