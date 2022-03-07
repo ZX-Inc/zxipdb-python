@@ -15,6 +15,12 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 12 10,25 * *'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
 
 jobs:
   Update:
@@ -24,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         mysql-version: [8.0]
-        python-version: [3.x]
+        python-version: [3.9]
 
     steps:
     - name: Checkout repository
@@ -41,13 +47,10 @@ jobs:
     - name: Create DB
       run: echo $(mysql -uroot -p123456 -e "CREATE DATABASE ipdata;")
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Install Python, pipenv and Pipfile packages
+      uses: palewire/install-python-pipenv-pipfile@v2
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Install pipenv
-      uses: dschep/install-pipenv-action@v1
 
     - name: Update ipdata
       run: |
