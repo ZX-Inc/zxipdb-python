@@ -85,13 +85,17 @@ jobs:
 
     - name: Test
       run: cat Release.txt
-
+    
+    - name: Get Latest Tag
+      id: previoustag
+      uses: WyriHaximus/github-action-get-previous-tag@v1
+  
     - name: Release
       uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v$(Get-Date -Format 'yyyy.MM.dd')
+        tag_name: ${{ steps.previoustag.outputs.tag }}
         files: |
           Release.txt
           data/*.db.gz
