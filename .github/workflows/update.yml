@@ -30,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         mysql-version: [8.0]
-        python-version: [3.9]
+        python-version: [3.8]
 
     steps:
     - name: Checkout repository
@@ -43,7 +43,7 @@ jobs:
         Set-TimeZone -Name "China Standard Time"
         $timelocal="Auto Update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
         $tagname="v$(Get-Date -Format 'yyyy.MM.dd')"
-        echo ::set-output name=TIMELOCAL::${timelocal}
+        echo ::set-output name=TIMELOCAL::"${timelocal}"
         echo ::set-output name=TAGNAME::${tagname}
 
     - name: Initialize mysql
@@ -64,7 +64,7 @@ jobs:
 
     - name: Update ipdata
       run: |
-        echo ${steps.get_tag.outputs.TIMELOCAL}
+        echo "${steps.get_tag.outputs.TIMELOCAL}"
         pipenv install --dev
         pipenv run python ./IP_Sync/ip_Sync.py
         
@@ -73,7 +73,7 @@ jobs:
         git config --global user.email ${{ secrets.USER_EMAIL }}
         git config --global user.name ${{ secrets.USER_NAME }}
         git add .
-        git commit -m ${steps.get_tag.outputs.TIMELOCAL}
+        git commit -m "${steps.get_tag.outputs.TIMELOCAL}"
         git pull origin main
         git tag -a ${steps.get_tag.outputs.TAGNAME} -m "${steps.get_tag.outputs.TIMELOCAL}"
         
@@ -85,7 +85,7 @@ jobs:
         tags: true
         
     - name: Build
-      run: echo ${steps.get_tag.outputs.TIMELOCAL} > Release.txt
+      run: echo "${steps.get_tag.outputs.TIMELOCAL}" > Release.txt
 
     - name: Test
       run: cat Release.txt
